@@ -15,6 +15,8 @@ public class EmployeeInfo extends javax.swing.JFrame {
     public EmployeeInfo() {
         initComponents();
     }
+    
+    //Database connection
 
     /**
      * This method is called from within the constructor to initialize the form.
