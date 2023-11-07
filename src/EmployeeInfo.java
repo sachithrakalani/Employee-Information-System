@@ -7,6 +7,9 @@
  *
  * @author user
  */
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class EmployeeInfo extends javax.swing.JFrame {
 
     /**
@@ -14,9 +17,26 @@ public class EmployeeInfo extends javax.swing.JFrame {
      */
     public EmployeeInfo() {
         initComponents();
+        Connect();
     }
     
-    //Database connection
+//Database connection
+    
+    Connection con;
+    PreparedStatement pst;
+    
+    public void Connect() {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_information_system","root","");
+            System.out.println("Connectttttrrreedded");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            System.out.println("Connectttttrrreeddeddddddddddddd");
+            Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
