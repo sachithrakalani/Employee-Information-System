@@ -29,11 +29,11 @@ public class EmployeeInfo extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_information_system","root","");
-            System.out.println("Connectttttrrreedded");
+            System.out.println("Connected");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            System.out.println("Connectttttrrreeddeddddddddddddd");
+            System.out.println("Not Connected ");
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
