@@ -10,6 +10,7 @@
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 public class EmployeeInfo extends javax.swing.JFrame {
 
     /**
@@ -37,7 +38,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,6 +165,11 @@ public class EmployeeInfo extends javax.swing.JFrame {
         btnSave1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnSave1.setForeground(new java.awt.Color(255, 255, 255));
         btnSave1.setText("Save");
+        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave1ActionPerformed(evt);
+            }
+        });
 
         btnSave2.setBackground(new java.awt.Color(0, 0, 255));
         btnSave2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -225,6 +231,40 @@ public class EmployeeInfo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+//Insert Data into Database
+    
+    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+        try {
+            String fname,lname,city,phone,salary;
+            fname = txtFn.getText();
+            lname = txtLn.getText();
+            city =  txtCity.getText();
+            phone = txtPhone.getText();
+            salary = txtSalary.getText();
+            pst = con.prepareStatement("INSERT INTO empinfo(fname,lname,city,phone,salary)values(?,?,?,?,?) ");
+            
+            pst.setString(1,fname);
+            pst.setString(2, lname);
+            pst.setString(3,city);
+            pst.setString(4, phone);
+            pst.setString(5, salary);
+            
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this,"Record saved ");
+            
+            txtFn.setText("");
+            txtLn.setText("");
+            txtCity.setText("");
+            txtPhone.setText("");
+            txtSalary.setText("");
+            txtFn.requestFocus();
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSave1ActionPerformed
 
     /**
      * @param args the command line arguments
