@@ -8,9 +8,11 @@
  * @author user
  */
 import java.sql.*;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class EmployeeInfo extends javax.swing.JFrame {
 
     /**
@@ -19,6 +21,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
     public EmployeeInfo() {
         initComponents();
         Connect();
+        table_update();
     }
     
 //Database connection
@@ -30,13 +33,44 @@ public class EmployeeInfo extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_information_system","root","");
-            System.out.println("Connected");
+            //System.out.println("Connected");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            System.out.println("Not Connected ");
+            //System.out.println("Not Connected ");
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void table_update() {
+        int cc;
+        try{
+            pst = con.prepareStatement("select * from empinfo ");
+            ResultSet rs = pst.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            cc = rsmd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel)jTable1.getModel();
+            dft.setRowCount(0);
+            
+            while(rs.next()){
+                Vector v2 = new Vector();
+                
+                for(int i = 1;i <= cc;i++){
+                    
+                    v2.add(rs.getString("id"));
+                    v2.add(rs.getString("fname"));
+                    v2.add(rs.getString("lname"));
+                    v2.add(rs.getString("city"));
+                    v2.add(rs.getString("phone"));
+                    v2.add(rs.getString("salary"));
+                }
+                dft.addRow(v2);
+            }
+        }catch (Exception e){
+            
+        }
+        
     }
     
     /**
@@ -251,6 +285,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this,"Record saved ");
+            table_update();
             
             txtFn.setText("");
             txtLn.setText("");
