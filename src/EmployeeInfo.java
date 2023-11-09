@@ -20,8 +20,8 @@ public class EmployeeInfo extends javax.swing.JFrame {
      */
     public EmployeeInfo() {
         initComponents();
-        Connect();
-        table_update();
+        connect();
+        tableUpdate();
     }
     
 //Database connection
@@ -29,7 +29,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     
-    public void Connect() {
+    public void connect() {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_information_system","root","");
@@ -42,7 +42,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
     
     
     //Data View for tabel
-    private void table_update() {
+    private void tableUpdate() {
         int cc;
         try{
             pst = con.prepareStatement("select * from empinfo ");
@@ -285,7 +285,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this,"Record saved ");
-            table_update();
+            tableUpdate();
             
             txtFn.setText("");
             txtLn.setText("");
