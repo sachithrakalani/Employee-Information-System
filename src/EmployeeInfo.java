@@ -299,15 +299,12 @@ public class EmployeeInfo extends javax.swing.JFrame {
             txtSalary.setText("");
             txtFn.requestFocus();
             
-            
-            
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSave1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
         
@@ -317,6 +314,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
         txtCity.setText(model.getValueAt(selectedIndex,3).toString());
         txtPhone.setText(model.getValueAt(selectedIndex,4).toString());
         txtSalary.setText(model.getValueAt(selectedIndex,5).toString());
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
