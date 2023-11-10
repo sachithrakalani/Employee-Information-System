@@ -219,6 +219,11 @@ public class EmployeeInfo extends javax.swing.JFrame {
                 "ID", "First Name", "Last Name ", "City", "Phone", "Salary"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -300,6 +305,19 @@ public class EmployeeInfo extends javax.swing.JFrame {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSave1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
+        
+        int id  = Integer.parseInt(model.getValueAt(selectedIndex,0).toString());
+        txtFn.setText(model.getValueAt(selectedIndex,1).toString());
+        txtLn.setText(model.getValueAt(selectedIndex,2).toString());
+        txtCity.setText(model.getValueAt(selectedIndex,3).toString());
+        txtPhone.setText(model.getValueAt(selectedIndex,4).toString());
+        txtSalary.setText(model.getValueAt(selectedIndex,5).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
