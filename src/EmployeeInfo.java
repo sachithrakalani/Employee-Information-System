@@ -307,6 +307,8 @@ public class EmployeeInfo extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
+        System.out.println(selectedIndex);
+        //System.out.println(model.getValueAt(3,3));
         
         int id  = Integer.parseInt(model.getValueAt(selectedIndex,0).toString());
         txtFn.setText(model.getValueAt(selectedIndex,1).toString());
