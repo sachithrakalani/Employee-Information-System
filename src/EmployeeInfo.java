@@ -209,6 +209,11 @@ public class EmployeeInfo extends javax.swing.JFrame {
         btnSave2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnSave2.setForeground(new java.awt.Color(255, 255, 255));
         btnSave2.setText("Edit");
+        btnSave2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 255), 3, true));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -307,8 +312,6 @@ public class EmployeeInfo extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
-        System.out.println(selectedIndex);
-        //System.out.println(model.getValueAt(3,3));
         
         int id  = Integer.parseInt(model.getValueAt(selectedIndex,0).toString());
         txtFn.setText(model.getValueAt(selectedIndex,1).toString());
@@ -318,6 +321,45 @@ public class EmployeeInfo extends javax.swing.JFrame {
         txtSalary.setText(model.getValueAt(selectedIndex,5).toString());
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
+       try {
+           
+           DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+           int selectedIndex = jTable1.getSelectedRow();
+        
+           int id  = Integer.parseInt(model.getValueAt(selectedIndex,0).toString());
+            
+            String fname,lname,city,phone,salary;
+            fname = txtFn.getText();
+            lname = txtLn.getText();
+            city =  txtCity.getText();
+            phone = txtPhone.getText();
+            salary = txtSalary.getText();
+            pst = con.prepareStatement("UPDATE empinfo set fname=?,lname=?,city=?,phone=?,salary=? WHERE id =? ");
+            
+            pst.setString(1,fname);
+            pst.setString(2, lname);
+            pst.setString(3,city);
+            pst.setString(4, phone);
+            pst.setString(5, salary);
+            pst.setInt(6, id);
+            
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this,"Record Updated");
+            tableUpdate();
+            
+            txtFn.setText("");
+            txtLn.setText("");
+            txtCity.setText("");
+            txtPhone.setText("");
+            txtSalary.setText("");
+            txtFn.requestFocus();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSave2ActionPerformed
 
     /**
      * @param args the command line arguments
