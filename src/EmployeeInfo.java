@@ -346,7 +346,7 @@ public class EmployeeInfo extends javax.swing.JFrame {
             pst.setInt(6, id);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this,"Record Updated");
+            JOptionPane.showMessageDialog(this,"RECORED UPDATE");
             tableUpdate();
             
             txtFn.setText("");
