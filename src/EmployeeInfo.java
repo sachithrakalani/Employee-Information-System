@@ -194,6 +194,11 @@ public class EmployeeInfo extends javax.swing.JFrame {
         btnSave.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Delete");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnSave1.setBackground(new java.awt.Color(0, 0, 255));
         btnSave1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -360,6 +365,31 @@ public class EmployeeInfo extends javax.swing.JFrame {
             Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSave2ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        try {
+           
+           DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+           int selectedIndex = jTable1.getSelectedRow();
+           int id  = Integer.parseInt(model.getValueAt(selectedIndex,0).toString());
+           pst = con.prepareStatement("DELETE FROM empinfo WHERE id = ? ");
+            
+           pst.setInt(1, id);
+           pst.executeUpdate();
+           JOptionPane.showMessageDialog(this,"RECORED DELETED");
+           tableUpdate();
+            
+           txtFn.setText("");
+           txtLn.setText("");
+           txtCity.setText("");
+           txtPhone.setText("");
+           txtSalary.setText("");
+           txtFn.requestFocus();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
